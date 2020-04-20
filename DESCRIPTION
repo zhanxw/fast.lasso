@@ -1,0 +1,13 @@
+Package: fast.lasso
+Type: Package
+Title: Fast Lasso Implementation for Summary Statistics
+Version: 1.0
+Date: 2020-04-20
+Author: Xiaowei Zhan
+Maintainer: Xiaowei Zhan <zhanxw@gmail.com>, Dajiang Liu<dxl46@psu.edu>
+Description: This is a drop-in replacement for fast LASSO implementation.
+License: GPL-3
+Imports: Rcpp (>= 1.0.2), RcppEigen (>= 0.3.3.5.0)
+LinkingTo: Rcpp, RcppEigen
+RoxygenNote: 6.1.1
+Encoding: UTF-8
