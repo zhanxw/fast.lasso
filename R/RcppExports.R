@@ -11,6 +11,7 @@
 #' @param lambda l1 penalty parameter
 #' @param alpha l2 penalty parameter
 #' @return fitted regression coefficient vector
+#' @export
 fast_lasso_sum_ess <- function(bVec, sVec, r2Mat, n, group, lambda, alpha) {
     .Call('_fast_lasso_fast_lasso_sum_ess', PACKAGE = 'fast.lasso', bVec, sVec, r2Mat, n, group, lambda, alpha)
 }

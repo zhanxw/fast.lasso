@@ -38,6 +38,7 @@ void print(const char* str,
 //' @param lambda l1 penalty parameter
 //' @param alpha l2 penalty parameter
 //' @return fitted regression coefficient vector
+//' @export
 // [[Rcpp::export]]
 Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
                                    const Eigen::VectorXd& sVec,
