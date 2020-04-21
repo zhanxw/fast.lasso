@@ -16,8 +16,8 @@ jobs:
           echo "::set-env name=DEPLOY_PATH::docs"
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
-        uses: maxheld83/ghpages@v0.2.0
+        uses: maxheld83/ghpages@v0.3.0
         env:
-          BUILD_DIR: $DEPLOY_PATH
+          BUILD_DIR: docs/
           GH_PAT: ${{ secrets.GH_PAT }}
     container: rocker/verse:latest
