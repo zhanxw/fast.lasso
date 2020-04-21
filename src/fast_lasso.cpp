@@ -37,6 +37,7 @@ void print(const char* str,
 //' @param group 1-based group indicator
 //' @param lambda l1 penalty parameter
 //' @param alpha l2 penalty parameter
+//' @param maxIter maximum number of iterations
 //' @return fitted regression coefficient vector
 //' @export
 // [[Rcpp::export]]
@@ -46,7 +47,8 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
                                    int n,
                                    const Eigen::VectorXi& group,
                                    const Eigen::VectorXd& lambda,
-                                   const Eigen::VectorXd& alpha) {
+                                   const Eigen::VectorXd& alpha,
+                                   const int maxIter = 100) {
 
 
   // z.vec <- b.vec/s.vec;
@@ -79,11 +81,11 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
 
   // print("betaVec = ", betaVec);
   
-  int maxIter  = 100;
+  int iter  = 0;
   // while(sum(abs(beta.vec-beta0.vec))>1e-5) {
-  while ( (beta0Vec - betaVec).array().square().sum() > 1e-5 && maxIter > 0) {
+  while ( (beta0Vec - betaVec).array().square().sum() > 1e-5 && iter < maxIter) {
     // print("betaVec = ", betaVec);
-    maxIter --;
+    ++iter;
     // beta0.vec <- beta.vec;
     beta0Vec = betaVec;
     // for(jj in 1:length(z.vec)) {
@@ -120,7 +122,7 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
       }
     }
   }
-  if (maxIter == 0) {
+  if (iter == maxIter) {
     REprintf("max iteration reached!!\n");
   }
   // return(beta.vec);

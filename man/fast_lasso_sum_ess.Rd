@@ -4,7 +4,8 @@
 \alias{fast_lasso_sum_ess}
 \title{Rewrite lasso.sum.ess}
 \usage{
-fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha)
+fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha,
+  maxIter = 100L)
 }
 \arguments{
 \item{bVec}{genetic effect estimates}
@@ -20,6 +21,8 @@ fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha)
 \item{lambda}{l1 penalty parameter}
 
 \item{alpha}{l2 penalty parameter}
+
+\item{maxIter}{maximum number of iterations}
 }
 \value{
 fitted regression coefficient vector

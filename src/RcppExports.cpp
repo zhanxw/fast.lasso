@@ -7,8 +7,8 @@
 using namespace Rcpp;
 
 // fast_lasso_sum_ess
-Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec, const Eigen::VectorXd& sVec, const Eigen::MatrixXd& r2Mat, int n, const Eigen::VectorXi& group, const Eigen::VectorXd& lambda, const Eigen::VectorXd& alpha);
-RcppExport SEXP _fast_lasso_fast_lasso_sum_ess(SEXP bVecSEXP, SEXP sVecSEXP, SEXP r2MatSEXP, SEXP nSEXP, SEXP groupSEXP, SEXP lambdaSEXP, SEXP alphaSEXP) {
+Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec, const Eigen::VectorXd& sVec, const Eigen::MatrixXd& r2Mat, int n, const Eigen::VectorXi& group, const Eigen::VectorXd& lambda, const Eigen::VectorXd& alpha, const int maxIter);
+RcppExport SEXP _fast_lasso_fast_lasso_sum_ess(SEXP bVecSEXP, SEXP sVecSEXP, SEXP r2MatSEXP, SEXP nSEXP, SEXP groupSEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP maxIterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,13 +19,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Eigen::VectorXi& >::type group(groupSEXP);
     Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type lambda(lambdaSEXP);
     Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha));
+    Rcpp::traits::input_parameter< const int >::type maxIter(maxIterSEXP);
+    rcpp_result_gen = Rcpp::wrap(fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha, maxIter));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_fast_lasso_fast_lasso_sum_ess", (DL_FUNC) &_fast_lasso_fast_lasso_sum_ess, 7},
+    {"_fast_lasso_fast_lasso_sum_ess", (DL_FUNC) &_fast_lasso_fast_lasso_sum_ess, 8},
     {NULL, NULL, 0}
 };
 
