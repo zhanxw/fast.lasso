@@ -2,4 +2,5 @@
 
 export(cor2cov)
 export(lasso.sum.ess)
+export(fast_lasso_sum_ess)
 import(RcppEigen)

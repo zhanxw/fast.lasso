@@ -8,50 +8,6 @@
 //
 // [[Rcpp::depends(RcppEigen)]]
 
-#if 0
-// simple example of creating two matrices and
-// returning the result of an operatioon on them
-//
-// via the exports attribute we tell Rcpp to make this function
-// available from R
-//
-// [[Rcpp::export]]
-Eigen::MatrixXd rcppeigen_hello_world() {
-  Eigen::MatrixXd m1 = Eigen::MatrixXd::Identity(3, 3);
-  Eigen::MatrixXd m2 = Eigen::MatrixXd::Random(3, 3);
-
-  return m1 + 3 * (m1 + m2);
-}
-
-
-// another simple example: outer product of a vector,
-// returning a matrix
-//
-// [[Rcpp::export]]
-Eigen::MatrixXd rcppeigen_outerproduct(const Eigen::VectorXd & x) {
-  Eigen::MatrixXd m = x * x.transpose();
-  return m;
-}
-
-// and the inner product returns a scalar
-//
-// [[Rcpp::export]]
-double rcppeigen_innerproduct(const Eigen::VectorXd & x) {
-  double v = x.transpose() * x;
-  return v;
-}
-
-// and we can use Rcpp::List to return both at the same time
-//
-// [[Rcpp::export]]
-Rcpp::List rcppeigen_bothproducts(const Eigen::VectorXd & x) {
-  Eigen::MatrixXd op = x * x.transpose();
-  double          ip = x.transpose() * x;
-  return Rcpp::List::create(Rcpp::Named("outer")=op,
-                            Rcpp::Named("inner")=ip);
-}
-# endif
-
 void print(const char* str,
            const Eigen::MatrixXd& m) {
   Rprintf("%s\n", str);
@@ -72,9 +28,16 @@ void print(const char* str,
     Rprintf("\n");
 }
 
-// rewrite lasso.sum.ess
-// returning a matrix
-//
+//' Rewrite lasso.sum.ess
+//'
+//' @param bVec genetic effect estimates
+//' @param sVec standard error of genetic effect estimates;
+//' @param r2Mat residual errors;
+//' @param n sample size;
+//' @param group 1-based group indicator
+//' @param lambda l1 penalty parameter
+//' @param alpha l2 penalty parameter
+//' @return fitted regression coefficient vector
 // [[Rcpp::export]]
 Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
                                    const Eigen::VectorXd& sVec,
