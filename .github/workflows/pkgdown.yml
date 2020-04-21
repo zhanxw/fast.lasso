@@ -15,7 +15,7 @@ jobs:
           Rscript -e "pkgdown::build_site()"
           echo "::set-env name=DEPLOY_PATH::docs"
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' && github.repository_owner != 'DajiangGroup'
         uses: maxheld83/ghpages@v0.3.0
         env:
           BUILD_DIR: docs/
