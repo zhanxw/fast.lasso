@@ -82,8 +82,10 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
   // print("betaVec = ", betaVec);
   
   int iter  = 0;
+  bool converged = false;
   // while(sum(abs(beta.vec-beta0.vec))>1e-5) {
-  while ( (beta0Vec - betaVec).array().square().sum() > 1e-5 && iter < maxIter) {
+  while ( !converged && iter < maxIter) {
+    converged = (beta0Vec - betaVec).array().square().sum() <= 1e-5;
     // print("betaVec = ", betaVec);
     ++iter;
     // beta0.vec <- beta.vec;
@@ -126,8 +128,9 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
     REprintf("max iteration reached!!\n");
   }
   // return(beta.vec);
-  return List::create(Named("beta") = betaVec,
-                      Names("iteration") = iter);
+  return Rcpp::List::create(Rcpp::Named("beta") = betaVec,
+                            Rcpp::Names("iteration") = iter,
+                            Rcpp::Names("isConverged") = converged);
 }
 
 // sourceCpp('rcppeigen_hello_world.cpp')
