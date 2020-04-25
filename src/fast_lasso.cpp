@@ -25,9 +25,9 @@ void print(const char* str,
            const Eigen::VectorXd& m) {
   Rprintf("%s\n", str);
   for (int i = 0; i < m.size(); i ++) {
-      Rprintf(" %g", m(i));
+    Rprintf(" %g", m(i));
   }
-    Rprintf("\n");
+  Rprintf("\n");
 }
 
 //' Rewrite lasso.sum.ess
@@ -41,16 +41,16 @@ void print(const char* str,
 //' @param alpha l2 penalty parameter
 //' @param maxIter maximum number of iterations
 //' @return a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
-//' @export
 // [[Rcpp::export]]
 List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
-                                   const Eigen::VectorXd& sVec,
-                                   const Eigen::MatrixXd& r2Mat,
-                                   int n,
-                                   const Eigen::VectorXi& group,
-                                   const Eigen::VectorXd& lambda,
-                                   const Eigen::VectorXd& alpha,
-                                   const int maxIter = 100) {
+                        const Eigen::VectorXd& sVec,
+                        const Eigen::MatrixXd& r2Mat,
+                        int n,
+                        const Eigen::VectorXi& group,
+                        const Eigen::VectorXd& lambda,
+                        const Eigen::VectorXd& alpha,
+                        const Eigen::VectorXd& initVec,
+                        const int maxIter = 100) {
 
   // z.vec <- b.vec/s.vec;
   Eigen::VectorXd zVec = bVec.array() / sVec.array();
@@ -66,11 +66,11 @@ List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
   // Eigen::MatrixXd covMat = vVec.asDiagonal() * r2Mat * vVec.asDiagonal();
 
   // print("vVec = ", vVec);
-  // print("r2Mat = ", r2Mat);  
+  // print("r2Mat = ", r2Mat);
   // print("covMat = ", covMat);
   // // #beta.vec <- ginv(cov.mat)%*%u.vec;
   // beta.vec <- b.vec;
-  Eigen::VectorXd betaVec = bVec;
+  Eigen::VectorXd betaVec = initVec;
   // print("betaVec = ", betaVec);
   // beta0.vec <- rep(0,length(z.vec));
   const int vecLen = bVec.size();
@@ -81,7 +81,7 @@ List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
   double n_times_alpha_group_jj;
 
   // print("betaVec = ", betaVec);
-  
+
   int iter  = 0;
   bool converged = false;
   // while(sum(abs(beta.vec-beta0.vec))>1e-5) {
@@ -99,7 +99,7 @@ List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
       betaVec(jj) = 0;
       x_j_times_r = uVec(jj) - (covMat.row(jj) * betaVec).sum();
       // Rprintf("x_j_times_r = %g\n", x_j_times_r);
-      
+
       betaVec(jj) = old_beta_jj;
 
       // x.j.times.x <- cov.mat[jj,jj];
@@ -113,7 +113,7 @@ List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
       //   beta.vec[jj] <- 0;
       n_times_alpha_group_jj = alpha( group(jj) - 1) * n;
       // Rprintf("n_times_alpha_group_jj = %g\n", n_times_alpha_group_jj);
-      
+
       if (x_j_times_r > n_times_alpha_group_jj) {
         betaVec(jj) = (x_j_times_r - n_times_alpha_group_jj) / (x_j_times_x + 2.0 * n * lambda( group(jj) - 1) );
       } else if (x_j_times_r <  - n_times_alpha_group_jj) {

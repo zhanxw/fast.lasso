@@ -32,6 +32,6 @@ group = c(1, 2, 3)
 alpha = rep(0.1, 3)
 lambda = rep(0.1, 3)
 lasso.sum.ess(b.vec, s.vec, r2.mat, n = 3, group, lambda, alpha)
-fast_lasso_sum_ess(b.vec, s.vec, r2.mat, n = 3, group, lambda, alpha)
+fast.lasso.sum.ess(b.vec, s.vec, r2.mat, n = 3, group, lambda, alpha)
 ```
 

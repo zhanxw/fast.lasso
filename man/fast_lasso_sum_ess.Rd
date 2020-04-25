@@ -4,7 +4,7 @@
 \alias{fast_lasso_sum_ess}
 \title{Rewrite lasso.sum.ess}
 \usage{
-fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha,
+fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha, initVec,
   maxIter = 100L)
 }
 \arguments{

@@ -12,8 +12,7 @@
 #' @param alpha l2 penalty parameter
 #' @param maxIter maximum number of iterations
 #' @return a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
-#' @export
-fast_lasso_sum_ess <- function(bVec, sVec, r2Mat, n, group, lambda, alpha, maxIter = 100L) {
-    .Call(`_fast_lasso_fast_lasso_sum_ess`, bVec, sVec, r2Mat, n, group, lambda, alpha, maxIter)
+fast_lasso_sum_ess <- function(bVec, sVec, r2Mat, n, group, lambda, alpha, initVec, maxIter = 100L) {
+    .Call(`_fast_lasso_fast_lasso_sum_ess`, bVec, sVec, r2Mat, n, group, lambda, alpha, initVec, maxIter)
 }
 

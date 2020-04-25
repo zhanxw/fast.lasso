@@ -62,3 +62,25 @@ library(RcppEigen)
 sourceCpp('../src/rcppeigen_hello_world.cpp')
 fast_lasso_sum_ess(b.vec, s.vec, r2.mat, n = 3, group, lambda, alpha)
 }
+
+#' Lasso calculation for summary statistics
+#'
+#' @param b.vec genetic effect estimates
+#' @param s.vec standard error of genetic effect estimates;
+#' @param r2.mat residual errors;
+#' @param n sample size;
+#' @param group 1-based group indicator
+#' @param lambda l1 penalty parameter
+#' @param alpha l2 penalty parameter
+#' @param init.vec inital guess
+#' @param max.iter maximum iteration
+#' @return a list: `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
+#'
+#' @export
+fast.lasso.sum.ess <- function(b.vec,s.vec,r2.mat,n,group,lambda,alpha, init.vec = NULL, max.iter = 100) {
+  print(init.vec)
+  if (is.null(init.vec)) {
+    init.vec <- b.vec
+  }
+  fast_lasso_sum_ess(b.vec, s.vec, r2.mat, n, group, lambda, alpha, init.vec, max.iter)
+}
