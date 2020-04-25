@@ -25,7 +25,7 @@ fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha,
 \item{maxIter}{maximum number of iterations}
 }
 \value{
-fitted regression coefficient vector
+a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
 }
 \description{
 Rewrite lasso.sum.ess

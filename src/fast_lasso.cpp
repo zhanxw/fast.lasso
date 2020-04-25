@@ -38,7 +38,7 @@ void print(const char* str,
 //' @param lambda l1 penalty parameter
 //' @param alpha l2 penalty parameter
 //' @param maxIter maximum number of iterations
-//' @return fitted regression coefficient vector
+//' @return a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
 //' @export
 // [[Rcpp::export]]
 Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
@@ -126,7 +126,8 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
     REprintf("max iteration reached!!\n");
   }
   // return(beta.vec);
-  return betaVec;
+  return List::create(Named("beta") = betaVec,
+                      Names("iteration") = iter);
 }
 
 // sourceCpp('rcppeigen_hello_world.cpp')

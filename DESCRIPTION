@@ -1,8 +1,8 @@
 Package: fast.lasso
 Type: Package
 Title: Fast Lasso Implementation for Summary Statistics
-Version: 1.0
-Date: 2020-04-20
+Version: 1.1
+Date: 2020-04-25
 Authors@R: c(person("Xiaowei", "Zhan", email = "zhanxw@gmail.com", role = c("aut", "cre")),
            person("Dajiang", "Liu", email = "dajiang.liu@gmail.com", role = "aut"))
 Maintainer: Xiaowei Zhan <zhanxw@gmail.com>
