@@ -20,7 +20,7 @@ library(fast.lasso)
 
 # Install
 
-Use `devtools::install_github("DajiangGroup/fast.lasso")`.
+Use `devtools::install_github("zhanxw/fast.lasso")`.
 
 # Example
 ```{r}
