@@ -8,6 +8,8 @@
 //
 // [[Rcpp::depends(RcppEigen)]]
 
+using namespace Rcpp;
+
 void print(const char* str,
            const Eigen::MatrixXd& m) {
   Rprintf("%s\n", str);
@@ -41,7 +43,7 @@ void print(const char* str,
 //' @return a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
 //' @export
 // [[Rcpp::export]]
-Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
+List fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
                                    const Eigen::VectorXd& sVec,
                                    const Eigen::MatrixXd& r2Mat,
                                    int n,
@@ -49,7 +51,6 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
                                    const Eigen::VectorXd& lambda,
                                    const Eigen::VectorXd& alpha,
                                    const int maxIter = 100) {
-
 
   // z.vec <- b.vec/s.vec;
   Eigen::VectorXd zVec = bVec.array() / sVec.array();
@@ -128,9 +129,9 @@ Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec,
     REprintf("max iteration reached!!\n");
   }
   // return(beta.vec);
-  return Rcpp::List::create(Rcpp::Named("beta") = betaVec,
-                            Rcpp::Names("iteration") = iter,
-                            Rcpp::Names("isConverged") = converged);
+  return List::create(Named("beta") = betaVec,
+                      Named("iteration") = iter,
+                      Named("isConverged") = converged);
 }
 
 // sourceCpp('rcppeigen_hello_world.cpp')

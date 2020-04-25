@@ -7,7 +7,7 @@
 using namespace Rcpp;
 
 // fast_lasso_sum_ess
-Eigen::MatrixXd fast_lasso_sum_ess(const Eigen::VectorXd& bVec, const Eigen::VectorXd& sVec, const Eigen::MatrixXd& r2Mat, int n, const Eigen::VectorXi& group, const Eigen::VectorXd& lambda, const Eigen::VectorXd& alpha, const int maxIter);
+List fast_lasso_sum_ess(const Eigen::VectorXd& bVec, const Eigen::VectorXd& sVec, const Eigen::MatrixXd& r2Mat, int n, const Eigen::VectorXi& group, const Eigen::VectorXd& lambda, const Eigen::VectorXd& alpha, const int maxIter);
 RcppExport SEXP _fast_lasso_fast_lasso_sum_ess(SEXP bVecSEXP, SEXP sVecSEXP, SEXP r2MatSEXP, SEXP nSEXP, SEXP groupSEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP maxIterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
