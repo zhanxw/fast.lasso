@@ -22,6 +22,8 @@ fast_lasso_sum_ess(bVec, sVec, r2Mat, n, group, lambda, alpha, initVec,
 
 \item{alpha}{l2 penalty parameter}
 
+\item{initVec}{initial value of beta}
+
 \item{maxIter}{maximum number of iterations}
 }
 \value{

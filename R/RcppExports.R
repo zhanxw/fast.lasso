@@ -10,6 +10,7 @@
 #' @param group 1-based group indicator
 #' @param lambda l1 penalty parameter
 #' @param alpha l2 penalty parameter
+#' @param initVec initial value of beta
 #' @param maxIter maximum number of iterations
 #' @return a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
 fast_lasso_sum_ess <- function(bVec, sVec, r2Mat, n, group, lambda, alpha, initVec, maxIter = 100L) {
